@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 
 
 var http          = require('http'),
@@ -26,9 +24,6 @@ function handler(req, res) {
       form.on('file', function(name, file) {
         console.log(file.path)
         if(file.type === 'application/zip'){
-/*          fs.readFile(file.path, 'utf-8', function(err, contents) { 
-            console.log(contents); 
-          }); */
           var extractor = new Extractor();
           extractor.on('items',function(data){
             console.log( JSON.stringify(data) )
