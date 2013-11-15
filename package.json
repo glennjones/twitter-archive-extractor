@@ -2,7 +2,7 @@
   "author": "Glenn Jones",
   "name": "twitter-archive-extractor",
   "description": "The module parses a twitter archive file and creates JSON unsing microformat schemas",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "scripts": {
     "start": "app.js"
   },
@@ -13,6 +13,13 @@
     "request": "2.23.x",
     "formidable": "~1.0.14",
     "decompress-zip": "0.0.3"
+  },
+  "devDependencies": {
+    "grunt": "0.4.1",
+    "grunt-contrib-jshint": "0.1.1",
+    "grunt-mocha-test": "0.4.0",
+    "mocha": "1.10.0",
+    "chai": "1.6.0"
   },
   "main": "index",
   "bin": {

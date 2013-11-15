@@ -1,0 +1,49 @@
+{
+  "source" : "\u003Ca href=\"http:\/\/www.tweetdeck.com\" rel=\"nofollow\"\u003ETweetDeck\u003C\/a\u003E",
+  "entities" : {
+    "user_mentions" : [ ],
+    "media" : [ ],
+    "hashtags" : [ {
+      "text" : "indieweb",
+      "indices" : [ 22, 31 ]
+    } ],
+    "urls" : [ {
+      "indices" : [ 22, 44 ],
+      "url" : "http:\/\/t.co\/GOZlJ6k3vz",
+      "expanded_url" : "http:\/\/medium.com",
+      "display_url" : "medium.com"
+    }, {
+      "indices" : [ 46, 68 ],
+      "url" : "http:\/\/t.co\/j75A0eVYhR",
+      "expanded_url" : "http:\/\/iawriter.com",
+      "display_url" : "iawriter.com"
+    }, {
+      "indices" : [ 70, 92 ],
+      "url" : "http:\/\/t.co\/fRQjGfiQbZ",
+      "expanded_url" : "http:\/\/onword.co\/4818",
+      "display_url" : "onword.co\/4818"
+    } ]
+  },
+  "in_reply_to_status_id_str" : "382445268513206272",
+  "geo" : {
+    "type" : "Point",
+    "coordinates" : [ 50.82430939, -0.1390583 ]
+  },
+  "id_str" : "382484003887906816",
+  "in_reply_to_user_id" : 946491,
+  "text" : "List of surggestion people gave for clean and compact writing apps  - http:\/\/t.co\/fRQjGfiQbZ thanks everyone for the pointers #indieweb",
+  "id" : 382484003887906816,
+  "in_reply_to_status_id" : 382445268513206272,
+  "created_at" : "2013-09-24 12:37:47 +0000",
+  "in_reply_to_screen_name" : "glennjones",
+  "in_reply_to_user_id_str" : "946491",
+  "user" : {
+    "name" : "Glenn Jones",
+    "screen_name" : "glennjones",
+    "protected" : false,
+    "id_str" : "946491",
+    "profile_image_url_https" : "https:\/\/pbs.twimg.com\/profile_images\/1442481406\/Glenn_Jones_normal.png",
+    "id" : 946491,
+    "verified" : false
+  }
+}

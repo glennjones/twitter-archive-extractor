@@ -12,7 +12,9 @@ var http          = require('http'),
 function handler(req, res) {
 
   // get the query object
-  var query = require('url').parse(req.url, true).query;
+  var query = require('url').parse(req.url, true).query,
+      start = new Date(),
+      count = 0;
 
   if (req.url === '/') {
     if( req.method === 'GET' ){
@@ -25,9 +27,16 @@ function handler(req, res) {
         console.log(file.path)
         if(file.type === 'application/zip'){
           var extractor = new Extractor();
+
           extractor.on('items',function(data){
-            console.log( JSON.stringify(data) )
+            count ++;
+            console.log( 'items parsed: ' + count + ' - in ' + (new Date().getTime() - start.getTime()) + 'ms' );
           })
+
+          extractor.on('file',function(data){
+            console.log( 'found ' + data.count + ' in file: ' + data.name );
+          })
+
           extractor.extract( file.path );
         }else{
           writeHTMLError( 'A twitter archive should be a zip file' );
