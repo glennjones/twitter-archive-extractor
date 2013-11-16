@@ -37,6 +37,10 @@ function handler(req, res) {
             console.log( 'found ' + data.count + ' in file: ' + data.name );
           })
 
+          extractor.on('profile',function(data){
+            console.log( 'found ' + JSON.stringify(data) );
+          })
+
           extractor.extract( file.path );
         }else{
           writeHTMLError( 'A twitter archive should be a zip file' );
