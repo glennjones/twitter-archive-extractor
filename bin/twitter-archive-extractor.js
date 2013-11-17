@@ -31,9 +31,9 @@ function handler(req, res) {
           // display output in the console
           // -------------------------------
 
-          extractor.on('items',function(data){
+          extractor.on('item',function(data){
             count ++;
-            console.log( 'items parsed: ' + count + ' - in ' + (new Date().getTime() - start.getTime()) + 'ms' );
+            console.log( 'item parsed: ' + count + ' - in ' + (new Date().getTime() - start.getTime()) + 'ms' );
           })
 
           extractor.on('file',function(data){
