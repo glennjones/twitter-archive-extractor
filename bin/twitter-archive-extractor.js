@@ -28,6 +28,9 @@ function handler(req, res) {
         if(file.type === 'application/zip'){
           var extractor = new Extractor();
 
+          // display output in the console
+          // -------------------------------
+
           extractor.on('items',function(data){
             count ++;
             console.log( 'items parsed: ' + count + ' - in ' + (new Date().getTime() - start.getTime()) + 'ms' );
@@ -40,6 +43,17 @@ function handler(req, res) {
           extractor.on('profile',function(data){
             console.log( 'found ' + JSON.stringify(data) );
           })
+
+          extractor.on('stats',function(data){
+            console.log( 'stats ' + JSON.stringify(data) );
+          })
+
+          extractor.on('done',function(data){
+            console.log( 'done ' + JSON.stringify(data) );
+          })
+
+          // -------------------------------
+
 
           extractor.extract( file.path );
         }else{
