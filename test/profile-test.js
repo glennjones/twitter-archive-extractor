@@ -5,9 +5,9 @@ var assert		= require('chai').assert,
 	Profile		= require('../lib/profile');
 
 
-// units tests h-card.js 
+// units tests for profile.js 
 
-describe("h-items test", function() {
+describe("profile test", function() {
 
 	
 

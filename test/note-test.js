@@ -5,9 +5,9 @@ var assert		= require('chai').assert,
 	Note		= require('../lib/note');
 
 
-// units tests h-items.js 
+// units tests for note.js 
 
-describe("h-items test", function() {
+describe("note test", function() {
 
 	
 
@@ -61,7 +61,7 @@ describe("h-items test", function() {
 
 
 
-	it("parseText", function() {
+/*	it("parseText", function() {
 
 		note.text = 'test the @glennjones username';
 		note.parseText();
@@ -121,7 +121,7 @@ describe("h-items test", function() {
 			'should NOT expand URL not in the entities urls array'
 			);
 
-	});
+	});*/
 
 
 });

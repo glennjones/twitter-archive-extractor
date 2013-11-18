@@ -44,6 +44,10 @@ function handler(req, res) {
             console.log( 'found ' + JSON.stringify(data) );
           })
 
+          extractor.on('checkin',function(data){
+            console.log( 'found ' + JSON.stringify(data) );
+          })
+
           extractor.on('stats',function(data){
             console.log( 'stats ' + JSON.stringify(data) );
           })
