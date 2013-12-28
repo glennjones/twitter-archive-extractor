@@ -23,11 +23,6 @@ describe("note test", function() {
 			'should contain a link to status on twitter'
 		);
 		
-		assert.strictEqual( 
-			note.out.items[0].properties.uid[0],
-			'twitter-status:382484003887906816',
-			'should contain a uid that namspaces twitter status'
-		);
 
 		assert.strictEqual( 
 			note.out.items[0].properties.published[0],
