@@ -48,6 +48,18 @@ function handler(req, res) {
             console.log( 'found ' + JSON.stringify(data) );
           })
 
+          extractor.on('link',function(data){
+            console.log( 'found ' + JSON.stringify(data) );
+          })
+
+          extractor.on('user',function(data){
+            console.log( 'found ' + JSON.stringify(data) );
+          })
+
+          extractor.on('sgn',function(data){
+            console.log( 'found ' + JSON.stringify(data) );
+          })
+
           extractor.on('stats',function(data){
             console.log( 'stats ' + JSON.stringify(data) );
           })
@@ -59,7 +71,11 @@ function handler(req, res) {
           // -------------------------------
 
 
-          extractor.extract( file.path );
+          extractor.extract({
+            'filePath': file.path,
+            'startDate': new Date('2000-11-28T13:37:46')
+          });
+
         }else{
           writeHTMLError( 'A twitter archive should be a zip file' );
         }
