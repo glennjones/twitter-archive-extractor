@@ -52,7 +52,7 @@ function handler(req, res) {
             console.log( 'found ' + JSON.stringify(data) );
           })
 
-          extractor.on('user',function(data){
+          extractor.on('person',function(data){
             console.log( 'found ' + JSON.stringify(data) );
           })
 
