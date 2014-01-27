@@ -13,6 +13,8 @@ function handler(req, res) {
 
   // get the query object
   var query = require('url').parse(req.url, true).query,
+      path = null,
+      useExtendedParsing = false,
       start = new Date(),
       count = 0;
 
@@ -23,9 +25,31 @@ function handler(req, res) {
     if( req.method === 'POST' ){
 
       var form = new formidable.IncomingForm();
+
+      // collect the file path
       form.on('file', function(name, file) {
         console.log(file.path)
         if(file.type === 'application/zip'){
+          path = file.path
+        }else{
+          writeHTMLError( 'A twitter archive should be a zip file' );
+        }
+      });
+
+
+      // collect form fields
+      form.on('field', function(name, value) {
+          if(name === 'useextendedparsing'){
+            useExtendedParsing = true;
+          }
+      });
+
+
+      // when form data parse ends
+      form.on('end', function() {
+
+        if(path){
+
           var extractor = new Extractor();
 
           // display output in the console
@@ -37,52 +61,60 @@ function handler(req, res) {
           })
 
           extractor.on('file',function(data){
-            console.log( 'found ' + data.count + ' in file: ' + data.name );
+            console.log( 'found file ', data.count + ' in file: ' + data.name );
           })
 
           extractor.on('profile',function(data){
-            console.log( 'found ' + JSON.stringify(data) );
+            console.log( 'found profile', JSON.stringify(data) );
+          })
+
+          extractor.on('note',function(data){
+            console.log( 'found note', JSON.stringify(data) );
           })
 
           extractor.on('checkin',function(data){
-            console.log( 'found ' + JSON.stringify(data) );
+            console.log( 'found checkin', JSON.stringify(data) );
           })
 
           extractor.on('link',function(data){
-            console.log( 'found ' + JSON.stringify(data) );
+            console.log( 'found link', JSON.stringify(data) );
           })
 
           extractor.on('person',function(data){
-            console.log( 'found ' + JSON.stringify(data) );
+            console.log( 'found person', JSON.stringify(data) );
           })
 
           extractor.on('sgn',function(data){
-            console.log( 'found ' + JSON.stringify(data) );
+            console.log( 'found sgn', JSON.stringify(data) );
           })
 
           extractor.on('stats',function(data){
-            console.log( 'stats ' + JSON.stringify(data) );
+            console.log( 'stats ', JSON.stringify(data) );
           })
 
           extractor.on('done',function(data){
-            console.log( 'done ' + JSON.stringify(data) );
+            console.log( 'done ', JSON.stringify(data) );
           })
 
           // -------------------------------
 
+          var extractOptions = {
+            'filePath': path,
+            'startDate': new Date('2013-12-31T23:59:59'),
+            'useExtendedParsing': useExtendedParsing
+          }
+          extractor.extract( extractOptions );
 
-          extractor.extract({
-            'filePath': file.path,
-            'startDate': new Date('2000-11-28T13:37:46')
-          });
-
-        }else{
-          writeHTMLError( 'A twitter archive should be a zip file' );
         }
-      })
 
-      form.parse(req, function(err, fields, files) {});
+      });
+
+      form.parse(req, function(err, fields, files) {
+        pramas = fields
+      });
+
     }
+
   }else if (req.url.indexOf('/javascript/') > -1 && !query.url) {
     writeJS(req.url);
   }else if (req.url.indexOf('/css/') > -1 && !query.url) {
