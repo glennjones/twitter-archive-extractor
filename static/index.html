@@ -3,24 +3,315 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Transmat Twitter Archive Parser</title>
+    <title>Transmat Twitter Backfill</title>
     <link rel="stylesheet" href="css/site.css" type="text/css" />
   </head>
   <body>
-    <h1>Transmat Twitter Archive Parser</h1>
-    <p class='notes'>Select a Twitter archive file.</p>
+    <h1>Transmat Twitter Backfill</h1>
+
 
     <form method="post" action="."  enctype="multipart/form-data">
-      <p><label for="file">file</label>
-        <input type="file" name="file" accept="application/zip" />
-      </p>
+        <h2>Upload twitter archive file</h2> 
+        <p><label for="file">Archive .zip file</label>
+          <input type="file" name="file" accept="application/zip" />
+        </p>
 
-      <p>
-      <input type="checkbox" name="useextendedparsing"/> <label for="useextendedparsing">useExtendedParsing</label>
-      </p>
-  
-      <input type="submit" value="Parse"/>
+        <p>
+        <input type="checkbox" name="useextendedparsing"/> <label class="checkbox-label" for="useextendedparsing">useExtendedParsing</label>
+        </p>
+    
+        <input type="submit" value="Parse"/>
      </form>
+
+
+
+      <form method="post" action="/updateentrymentions" >
+        <h2>Update entry mentions</h2> 
+        <p><label for="file">h-entry JSON with a sync ref to a tweet</label>
+          <textarea id="json" name="json">
+{
+    "items": [
+        {
+            "type": [
+                "h-entry",
+                "h-as-note"
+            ],
+            "properties": {
+                "url": [
+                    "http://localhost:3000/glennjones/notes/2014-04-26"
+                ],
+                "published": [
+                    "2014-04-26T11:10:37.000Z"
+                ],
+                "content": [
+                    {
+                        "value": "@mikestreety I used http://mapbox.com and there map styling tool Tilemill - this blog post explains how https://mapbox.com/blog/mapping-moves/ â€¦",
+                        "html": "<a class=\"auto-link h-x-username\" href=\"https://twitter.com/mikestreety\">@mikestreety</a> I used <a class=\"auto-link\" href=\"http://mapbox.com\">http://mapbox.com</a> and there map styling tool Tilemill - this blog post explains how <a class=\"auto-link\" href=\"https://mapbox.com/blog/mapping-moves/\">https://mapbox.com/blog/mapping-moves/</a> â€¦"
+                    }
+                ],
+                "name": [
+                    "@mikestreety I used http://mapbox.com and there map styling tool Tilemill - this blog post explains how https://mapbox.com/blog/mapping-moves/ â€¦"
+                ],
+                "author": [
+                    {
+                        "value": "Glenn Jones @glennjones",
+                        "type": [
+                            "h-card"
+                        ],
+                        "properties": {
+                            "name": [
+                                "Glenn Jones"
+                            ],
+                            "nickname": [
+                                "glennjones"
+                            ],
+                            "url": [
+                                "https://twitter.com/glennjones"
+                            ],
+                            "uid": [
+                                "946491"
+                            ],
+                            "photo": [
+                                "https://pbs.twimg.com/profile_images/1442481406/Glenn_Jones_bigger.png"
+                            ]
+                        }
+                    }
+                ],
+                "comment": [
+                    {
+                        "value": "Martin Digon â€@MartinDigon Apr 25 @glennjones Whatever that attractor is near the Marina, it must be worth a lot of hiking up and down over Hanover! ;) Details Expand Collapse Reply Retweet Retweeted Delete Favorite Favorited More Embed Tweet",
+                        "type": [
+                            "h-entry"
+                        ],
+                        "properties": {
+                            "url": [
+                                "https://twitter.com/martindigon/status/459720934367453184"
+                            ],
+                            "published": [
+                                "2014-04-25T15:49:46.000Z"
+                            ],
+                            "content": [
+                                {
+                                    "value": "@glennjones Whatever that attractor is near the Marina, it must be worth a lot of hiking up and down over Hanover! ;)",
+                                    "html": "<a class=\"auto-link h-x-username\" href=\"https://twitter.com/glennjones\">@glennjones</a> Whatever that attractor is near the Marina, it must be worth a lot of hiking up and down over Hanover! ;)"
+                                }
+                            ],
+                            "name": [
+                                "@glennjones Whatever that attractor is near the Marina, it must be worth a lot of hiking up and down over Hanover! ;)"
+                            ],
+                            "author": [
+                                {
+                                    "value": "Martin Digon @martindigon",
+                                    "type": [
+                                        "h-card"
+                                    ],
+                                    "properties": {
+                                        "name": [
+                                            "Martin Digon"
+                                        ],
+                                        "nickname": [
+                                            "martindigon"
+                                        ],
+                                        "url": [
+                                            "https://twitter.com/martindigon"
+                                        ],
+                                        "uid": [
+                                            "16128163"
+                                        ],
+                                        "photo": [
+                                            "https://pbs.twimg.com/profile_images/378800000474488046/b671ecffb8202a0a1deac7f78c4a0473_bigger.jpeg"
+                                        ]
+                                    }
+                                }
+                            ]
+                        },
+                        "children": [
+                            {
+                                "value": "@glennjones",
+                                "type": [
+                                    "h-x-username"
+                                ],
+                                "properties": {
+                                    "name": [
+                                        "@glennjones"
+                                    ],
+                                    "url": [
+                                        "https://twitter.com/glennjones"
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                ],
+                "in-reply-to": [
+                    {
+                        "value": "Glenn Jones â€@glennjones Apr 25 Having fun playing Moves data and mapping it, I really need to get outside of central Brighton more often! pic.twitter.com/eI61g5wai4 Details View photo Hide photo Reply Retweet Retweeted Delete Favorite Favorited More Embed Tweet",
+                        "type": [
+                            "h-cite"
+                        ],
+                        "properties": {
+                            "url": [
+                                "https://twitter.com/glennjones/status/459670730566008832"
+                            ],
+                            "published": [
+                                "2014-04-25T12:30:17.000Z"
+                            ],
+                            "content": [
+                                {
+                                    "value": "Having fun playing Moves data and mapping it, I really need to get outside of central Brighton more often! pic.twitter.com/eI61g5wai4",
+                                    "html": "Having fun playing Moves data and mapping it, I really need to get outside of central Brighton more often! pic.twitter.com/eI61g5wai4"
+                                }
+                            ],
+                            "name": [
+                                "Having fun playing Moves data and mapping it, I really need to get outside of central Brighton more often! pic.twitter.com/eI61g5wai4"
+                            ],
+                            "publication": [
+                                "twitter.com"
+                            ],
+                            "accessed": [
+                                "2014-05-07T15:42:08.752Z"
+                            ],
+                            "author": [
+                                {
+                                    "value": "Glenn Jones @glennjones",
+                                    "type": [
+                                        "h-card"
+                                    ],
+                                    "properties": {
+                                        "name": [
+                                            "Glenn Jones"
+                                        ],
+                                        "nickname": [
+                                            "glennjones"
+                                        ],
+                                        "url": [
+                                            "https://twitter.com/glennjones"
+                                        ],
+                                        "uid": [
+                                            "946491"
+                                        ],
+                                        "photo": [
+                                            "https://pbs.twimg.com/profile_images/1442481406/Glenn_Jones_bigger.png"
+                                        ]
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "value": "mike â€@mikestreety Apr 25 @glennjones how was this generated? Details Expand Collapse Reply Retweet Retweeted Delete Favorite Favorited More Embed Tweet",
+                        "type": [
+                            "h-cite"
+                        ],
+                        "properties": {
+                            "url": [
+                                "https://twitter.com/mikestreety/status/459729805093928960"
+                            ],
+                            "published": [
+                                "2014-04-25T16:25:01.000Z"
+                            ],
+                            "content": [
+                                {
+                                    "value": "@glennjones how was this generated?",
+                                    "html": "<a class=\"auto-link h-x-username\" href=\"https://twitter.com/glennjones\">@glennjones</a> how was this generated?"
+                                }
+                            ],
+                            "name": [
+                                "@glennjones how was this generated?"
+                            ],
+                            "publication": [
+                                "twitter.com"
+                            ],
+                            "accessed": [
+                                "2014-05-07T15:42:08.754Z"
+                            ],
+                            "author": [
+                                {
+                                    "value": "mike @mikestreety",
+                                    "type": [
+                                        "h-card"
+                                    ],
+                                    "properties": {
+                                        "name": [
+                                            "mike"
+                                        ],
+                                        "nickname": [
+                                            "mikestreety"
+                                        ],
+                                        "url": [
+                                            "https://twitter.com/mikestreety"
+                                        ],
+                                        "uid": [
+                                            "85171352"
+                                        ],
+                                        "photo": [
+                                            "https://pbs.twimg.com/profile_images/378800000046210219/b933cc9a6d21eb06189ec31b74259f46_bigger.jpeg"
+                                        ]
+                                    }
+                                }
+                            ]
+                        },
+                        "children": [
+                            {
+                                "value": "@glennjones",
+                                "type": [
+                                    "h-x-username"
+                                ],
+                                "properties": {
+                                    "name": [
+                                        "@glennjones"
+                                    ],
+                                    "url": [
+                                        "https://twitter.com/glennjones"
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                ],
+                "x-source": [
+                    "twitter-archieve-extended"
+                ],
+                "x-publishing-intent": [
+                    "explicit"
+                ],
+                "syndication": [
+                    "https://twitter.com/glennjones/status/460013070551887872"
+                ],
+                "path": [
+                    "2014-04-26"
+                ],
+                "x-access": [
+                    "public"
+                ],
+                "modified": [
+                    "2014-05-07T15:42:10.740Z"
+                ]
+            },
+            "children": [
+                {
+                    "value": "@mikestreety",
+                    "type": [
+                        "h-x-username"
+                    ],
+                    "properties": {
+                        "name": [
+                            "@mikestreety"
+                        ],
+                        "url": [
+                            "https://twitter.com/mikestreety"
+                        ]
+                    }
+                }
+            ]
+        }
+    ]
+}
+          </textarea>
+        </p>
+        <input type="submit" value="Update mentions"/>
+     </form>
+
 
      <footer class="vcard">
         <p class="copyright"><span>All content and code © Copyright <a rel="me" href="http://www.glennjones.net" class="fn url">Glenn Jones</a> 2013. All Rights Reserved.</p>

@@ -6,6 +6,7 @@ var http          = require('http'),
     fs            = require('fs'),
     StringDecoder = require('string_decoder').StringDecoder,
     formidable    = require('formidable');
+    utils         = require('../lib/utils'),
     Extractor     = require('../lib/extractor').Extractor;
 
 
@@ -84,6 +85,7 @@ function handler(req, res) {
             console.log( 'found person', JSON.stringify(data) );
           })
 
+
           extractor.on('sgn',function(data){
             console.log( 'found sgn', JSON.stringify(data) );
           })
@@ -91,7 +93,7 @@ function handler(req, res) {
           extractor.on('stats',function(data){
             console.log( 'stats ', JSON.stringify(data) );
           })
-
+            
           extractor.on('done',function(data){
             console.log( 'done ', JSON.stringify(data) );
           })
@@ -115,9 +117,44 @@ function handler(req, res) {
 
     }
 
-  }else if (req.url.indexOf('/javascript/') > -1 && !query.url) {
+  }
+
+
+  if (req.url === '/updateentrymentions' && req.method === 'POST') {
+      var json = {},
+          form = new formidable.IncomingForm();
+
+      // collect form fields
+      form.on('field', function(name, value) {
+          if(name === 'json' && value && value !== ''){
+            json = JSON.parse( value );
+          }
+      });
+
+      form.on('end', function() {
+          var extractor = new Extractor();
+          extractor.updateEntryMentions( json, function(err, data){
+            console.log('request done', err, JSON.stringify(data));
+          });
+
+
+          writeHTML('/../static/index.html');
+      })
+
+
+      form.parse(req, function(err, fields, files) {
+        pramas = fields
+      });
+
+  }
+
+
+
+  if (req.url.indexOf('/javascript/') > -1 && !query.url) {
     writeJS(req.url);
-  }else if (req.url.indexOf('/css/') > -1 && !query.url) {
+  }
+
+  if (req.url.indexOf('/css/') > -1 && !query.url) {
     writeCSS(req.url);
   }
 
