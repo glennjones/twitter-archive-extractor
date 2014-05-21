@@ -133,8 +133,8 @@ function handler(req, res) {
 
       form.on('end', function() {
           var extractor = new Extractor();
-          extractor.updateEntryMentions( json, function(err, data){
-            console.log('request done', err, JSON.stringify(data));
+          extractor.updateEntryMentions( json, function(err, data, hasChanged){
+            console.log('request done', err, JSON.stringify(data), hasChanged);
           });
 
 
