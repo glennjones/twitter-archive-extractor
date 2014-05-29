@@ -58,31 +58,53 @@ function handler(req, res) {
 
           extractor.on('item',function(data){
             count ++;
-            console.log( 'item parsed: ' + count + ' - in ' + (new Date().getTime() - start.getTime()) + 'ms' );
+            //console.log( 'item parsed: ' + count + ' - in ' + (new Date().getTime() - start.getTime()) + 'ms' );
           })
 
+
           extractor.on('file',function(data){
-            console.log( 'found file ', data.count + ' in file: ' + data.name );
+            console.log( 'found', data.count, 'status updates in file:', data.name );
           })
+
 
           extractor.on('profile',function(data){
             console.log( 'found profile', JSON.stringify(data) );
           })
 
+
           extractor.on('note',function(data){
-            console.log( 'found note', JSON.stringify(data) );
+            var url = '';
+            if(data){
+              url = data.items[0].properties.syndication[0]
+            }
+            console.log( 'found note', url );
           })
+
+
+          extractor.on('photo',function(data){
+            var url = '';
+            if(data){
+              url = data.items[0].properties.syndication[0]
+            }
+            console.log( 'found photo', url );
+          })
+
 
           extractor.on('checkin',function(data){
-            console.log( 'found checkin', JSON.stringify(data) );
+            var url = '';
+            if(data){
+              url = data.items[0].properties.syndication[0]
+            }
+            console.log( 'found checkin', url );
           })
 
-          extractor.on('link',function(data){
-            console.log( 'found link', JSON.stringify(data) );
-          })
 
           extractor.on('person',function(data){
-            console.log( 'found person', JSON.stringify(data) );
+            var nickname = '';
+            if(data){
+              nickname = data.items[0].children[0].properties.nickname
+            }
+            console.log( 'found person', nickname );
           })
 
 
@@ -90,10 +112,12 @@ function handler(req, res) {
             console.log( 'found sgn', JSON.stringify(data) );
           })
 
+
           extractor.on('stats',function(data){
             console.log( 'stats ', JSON.stringify(data) );
           })
             
+
           extractor.on('done',function(data){
             console.log( 'done ', JSON.stringify(data) );
           })
@@ -102,7 +126,7 @@ function handler(req, res) {
 
           var extractOptions = {
             'filePath': path,
-            'startDate': new Date('2013-12-31T23:59:59'),
+            'startDate': new Date('2005-12-31T23:59:59'),
             'useExtendedParsing': useExtendedParsing
           }
           extractor.extract( extractOptions );
