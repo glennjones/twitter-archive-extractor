@@ -95,7 +95,7 @@ function handler(req, res) {
             if(data){
               url = data.items[0].properties.syndication[0]
             }
-            console.log( 'found checkin', url );
+            console.log( 'found checkin', url, JSON.stringify(data) );
           })
 
 
