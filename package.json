@@ -2,7 +2,7 @@
   "author": "Glenn Jones",
   "name": "twitter-archive-extractor",
   "description": "The module parses a twitter archive file and creates JSON unsing microformat schemas",
-  "version": "0.0.27",
+  "version": "0.0.28",
   "scripts": {
     "start": "app.js"
   },
