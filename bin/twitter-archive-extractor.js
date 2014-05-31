@@ -56,11 +56,6 @@ function handler(req, res) {
           // display output in the console
           // -------------------------------
 
-          extractor.on('item',function(data){
-            count ++;
-            //console.log( 'item parsed: ' + count + ' - in ' + (new Date().getTime() - start.getTime()) + 'ms' );
-          })
-
 
           extractor.on('file',function(data){
             console.log( 'found', data.count, 'status updates in file:', data.name );
@@ -95,16 +90,16 @@ function handler(req, res) {
             if(data){
               url = data.items[0].properties.syndication[0]
             }
-            console.log( 'found checkin', url, JSON.stringify(data) );
+            console.log( 'found checkin', url );
           })
 
 
           extractor.on('person',function(data){
-            var nickname = '';
+            var nickname = [''];
             if(data){
               nickname = data.items[0].children[0].properties.nickname
             }
-            console.log( 'found person', nickname );
+            console.log( 'found person', nickname[0] );
           })
 
 
@@ -118,11 +113,19 @@ function handler(req, res) {
           })
             
 
-          extractor.on('done',function(data){
-            console.log( 'done ', JSON.stringify(data) );
+          extractor.on('done',function(data, counts){
+            console.log( 'done ', JSON.stringify(counts) );
+            //clearInterval(interval);
           })
 
           // -------------------------------
+
+      /*    var date = new Date();
+          var interval = setInterval(function(){
+            console.log('interval:', (new Date().getTime() - date.getTime()) + 'ms')
+            date = new Date();
+          }, 10)*/
+
 
           var extractOptions = {
             'filePath': path,
