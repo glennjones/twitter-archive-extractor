@@ -3,11 +3,11 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Transmat Twitter Backfill</title>
+    <title>Transmat Twitter Backfeed</title>
     <link rel="stylesheet" href="css/site.css" type="text/css" />
   </head>
   <body>
-    <h1>Transmat Twitter Backfill</h1>
+    <h1>Transmat Twitter Backfeed</h1>
 
 
     <form method="post" action="."  enctype="multipart/form-data">
@@ -17,7 +17,13 @@
         </p>
 
         <p>
-        <input type="checkbox" name="useextendedparsing"/> <label class="checkbox-label" for="useextendedparsing">useExtendedParsing</label>
+            <input type="checkbox" name="useextendedparsing"/> 
+            <label class="checkbox-label" for="useextendedparsing">useExtendedParsing</label>
+        </p>
+
+        <p> 
+            <label class="checkbox-label" for="extendlastndays">extendLastNDays</label>
+            <input type="text" name="extendlastndays" value="0"/> 
         </p>
     
         <input type="submit" value="Parse"/>

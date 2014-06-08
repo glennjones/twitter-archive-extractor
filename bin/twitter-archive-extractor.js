@@ -16,6 +16,7 @@ function handler(req, res) {
   var query = require('url').parse(req.url, true).query,
       path = null,
       useExtendedParsing = false,
+      extendLastNDays = 0,
       start = new Date(),
       count = 0;
 
@@ -42,6 +43,9 @@ function handler(req, res) {
       form.on('field', function(name, value) {
           if(name === 'useextendedparsing'){
             useExtendedParsing = true;
+          }
+          if(name === 'extendlastndays'){
+            extendLastNDays = value;
           }
       });
 
@@ -130,7 +134,8 @@ function handler(req, res) {
           var extractOptions = {
             'filePath': path,
             'startDate': new Date('2005-12-31T23:59:59'),
-            'useExtendedParsing': useExtendedParsing
+            'useExtendedParsing': useExtendedParsing,
+            'extendLastNDays': extendLastNDays
           }
           extractor.extract( extractOptions );
 
