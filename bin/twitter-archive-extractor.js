@@ -196,7 +196,7 @@ function handler(req, res) {
 
       form.on('end', function() {
           var extractor = new Extractor();
-          extractor.getTimeLine( options, function(err, data, hasChanged){
+          extractor.getTimeline( options, function(err, data, hasChanged){
             console.log('request done', err, JSON.stringify(data), hasChanged);
           });
 
