@@ -180,6 +180,37 @@ function handler(req, res) {
 
   }
 
+   if (req.url === '/gettimeline' && req.method === 'POST') {
+      var options = {},
+          form = new formidable.IncomingForm();
+
+      // collect form fields
+      form.on('field', function(name, value) {
+         if(name === 'twitterusername'){
+            options.twitterUsername = value;
+          }
+          if(name === 'username'){
+            options.username = value;
+          }
+      });
+
+      form.on('end', function() {
+          var extractor = new Extractor();
+          extractor.getTimeLine( options, function(err, data, hasChanged){
+            console.log('request done', err, JSON.stringify(data), hasChanged);
+          });
+
+          writeHTML('/../static/index.html');
+      })
+
+
+      form.parse(req, function(err, fields, files) {
+        pramas = fields
+      });
+
+  }
+
+
 
 
   if (req.url.indexOf('/javascript/') > -1 && !query.url) {
