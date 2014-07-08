@@ -18,6 +18,7 @@ function handler(req, res) {
       useExtendedParsing = false,
       extendLastNDays = 0,
       start = new Date(),
+      startDate = null,
       count = 0;
 
   if (req.url === '/') {
@@ -46,6 +47,9 @@ function handler(req, res) {
           }
           if(name === 'extendlastndays'){
             extendLastNDays = value;
+          }
+          if(name === 'startdate'){
+            startDate = new Date(value);
           }
       });
 
@@ -115,6 +119,14 @@ function handler(req, res) {
           extractor.on('stats',function(data){
             console.log( 'stats ', JSON.stringify(data) );
           })
+
+
+
+
+          extractor.on('fileexculded',function(data){
+            console.log( 'fileexculded ', JSON.stringify(data) );
+            //clearInterval(interval);
+          })
             
 
           extractor.on('done',function(data, counts){
@@ -133,7 +145,7 @@ function handler(req, res) {
 
           var extractOptions = {
             'filePath': path,
-            'startDate': new Date('2005-12-31T23:59:59'),
+            'startDate': (startDate)? startDate : new Date(2006,3,21), // start date of twitter,
             'useExtendedParsing': useExtendedParsing,
             'extendLastNDays': extendLastNDays
           }
